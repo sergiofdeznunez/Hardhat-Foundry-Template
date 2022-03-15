@@ -25,15 +25,28 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 const config: HardhatUserConfig = {
   solidity: "0.8.12",
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    hardhat: {
+    },
+    polygon: {
+      url: " https://polygon-rpc.com",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+    },
+    ethereum: {
+      url: "https://mainnet.infura.io/v3/a7a3d44c2ed340f2b0a3bfde0588ec47",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+    },
+    mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+    },
+    goerli: {
+      url: "https://goerli.infura.io/v3/a7a3d44c2ed340f2b0a3bfde0588ec47",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
     },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
+    currency: "EUR",
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
