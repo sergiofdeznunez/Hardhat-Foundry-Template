@@ -9,7 +9,7 @@ Foundry has some awesome testing capabilities, thanks to [cheatcodes](https://on
 ## Getting Started
 
 ```shell
-npm install
+yarn
 forge install
 ```
 
