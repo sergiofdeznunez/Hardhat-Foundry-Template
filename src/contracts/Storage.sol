@@ -14,7 +14,7 @@ contract Storage {
 
   constructor() {
     bytes32 position = storage_admin;
-    address admin = _msg_Sender();
+    address admin = msg.sender;
     assembly {
         sstore(position, admin)
     }
@@ -91,10 +91,6 @@ contract Storage {
   function _exists(uint256 tokenId) public view returns (bool) {
     }
 
-  function _msg_Sender() internal view returns (address) {
-      return msg.sender;
-    }
-
     fallback() external payable {
         bytes32 position = strg_next;
     assembly {
@@ -114,7 +110,7 @@ contract Storage {
     assembly {
         admin := sload(position)
     }
-    require(admin == _msg_Sender());
+    require(admin == msg.sender, "only the storage admin can call this function");
     _;
   }
 
@@ -124,7 +120,7 @@ contract Storage {
       assembly {
         admin := sload(position)
       }
-    require(admin == _msg_Sender());
+    require(admin == msg.sender, "only the contract admin can call this function");
     _;
   }
 }
