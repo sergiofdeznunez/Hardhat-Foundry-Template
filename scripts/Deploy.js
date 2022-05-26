@@ -14,12 +14,16 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Logic = await hre.ethers.getContractFactory("/*Logic contract name*/");
+  const Logic = await hre.ethers.getContractFactory("YOUR_LOGIC_CONTRACT_NAME");
+  const Proxy = await hre.ethers.getContractFactory("Proxy");
+
   const logic = await Logic.deploy();
-
   await logic.deployed();
-
   console.log("Logic deployed to:", logic.address);
+
+  const proxy = await Proxy.deploy(logic.address);
+  await proxy.deployed();
+  console.log("Proxy deployed (and initialized) to:", proxy.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
