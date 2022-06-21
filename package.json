@@ -1,5 +1,13 @@
 {
   "name": "hardhat-foundry-boiler",
+  "scripts": {
+    "full:test": "npx hardhat test && forge test -vvvv",
+    "hh:test": "npx hardhat test",
+    "f:test": "forge test -vvvv",
+    "hh:compile": "npx hardhat compile",
+    "f:compile": "forge build",
+    "deploy": "npx hardhat run scripts/Deploy.js --network"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.1",
