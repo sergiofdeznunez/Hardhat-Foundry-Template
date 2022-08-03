@@ -40,8 +40,10 @@ contract Proxy {
            sstore(position, _logic_contract)
        }
     }
+
     /**
-     * @dev Setters
+     * @notice Function to change the logic contract.
+     * @param _logicAddress New logic contract address.
      */
     function setLogicContract(address _logicAddress) public onlyProxyAdmin {   
         bytes32 position = logic_contract;   
@@ -50,6 +52,11 @@ contract Proxy {
         } 
         emit LogicContractChanged(_logicAddress);
     } 
+
+    /**
+     * @notice Function to set the admin of the contract.
+     * @param _newAdmin New admin of the contract.
+     */
     function setProxyAdmin(address _newAdmin) public onlyProxyAdmin  {
         bytes32 position = proxy_admin;   
         assembly {
@@ -57,8 +64,9 @@ contract Proxy {
         } 
         emit AdminChanged(_newAdmin);
     }
+    
     /**
-     * @dev Getter for the logic contract address
+     * @notice Getter for the logic contract address
      */
     function implementation() public view returns(address impl) {   
         bytes32 position = logic_contract;   
@@ -66,8 +74,9 @@ contract Proxy {
             impl := sload(position)
         } 
     } 
+    
     /**
-     * @dev Getter for the proxy admin address
+     * @notice Getter for the proxy admin address
      */
     function proxyAdmin() public view returns(address admin) {   
         bytes32 position = proxy_admin;   
@@ -88,6 +97,7 @@ contract Proxy {
       default {return (0, returndatasize())}
         }
     }
+    
     /**
     * @dev only the admin is allowed to call the functions that implement this modifier
     */

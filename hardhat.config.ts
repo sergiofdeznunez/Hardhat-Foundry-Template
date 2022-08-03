@@ -43,6 +43,18 @@ const config: HardhatUserConfig = {
       url: "https://goerli.infura.io/v3/a7a3d44c2ed340f2b0a3bfde0588ec47",
       accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
     },
+    cronos: {
+      url: "https://evm.cronos.org",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+    },
+    celo: {
+      url: "https://forno.celo.org",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+    },
+    gnosis: {
+      url: "https://rpc.gnosischain.com/",
+      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
