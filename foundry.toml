@@ -1,4 +1,4 @@
-[default]
+[profile.default]
 src = 'src'                                                   # the source directory
 test = 'src/test'                                             # the test directory
 out = 'artifacts/contracts'                                   # the output directory (for artifacts)

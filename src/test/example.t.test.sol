@@ -1,5 +1,5 @@
 
-pragma solidity 0.8.12;
+pragma solidity 0.8.7;
 
 import "ds-test/test.sol";
 import "../contracts/Proxy.sol";
@@ -18,7 +18,7 @@ contract Test is DSTest {
     CheatCodes cheats = CheatCodes(HEVM_ADDRESS);
 
     function setUp () public {
-        proxy = new Proxy();
+        proxy = new Proxy(/*logic contract address*/);
     }
     /*
      * ProxyTests

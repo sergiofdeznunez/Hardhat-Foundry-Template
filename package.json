@@ -5,6 +5,7 @@
     "hh:test": "npx hardhat test",
     "f:test": "forge test -vvvv",
     "hh:compile": "npx hardhat compile",
+    "hh:coverage": "hardhat coverage",
     "f:compile": "forge build",
     "deploy": "npx hardhat run scripts/Deploy.js --network"
   },
@@ -41,6 +42,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "latest",
     "@openzeppelin/contracts-upgradeable": "latest"
   }
 }

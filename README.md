@@ -4,13 +4,15 @@ This is a solidity template which lets you use both, [Hardhat](https://hardhat.o
 
 ## Why use both the tools?
 
-Foundry has some awesome testing capabilities, thanks to [cheatcodes](https://onbjerg.github.io/foundry-book/forge/cheatcodes.html), which can manipulate the state of the blockchain. However, I was missing out on some features offered by Hardhat. 
+Foundry has some awesome testing capabilities, thanks to [cheatcodes](https://book.getfoundry.sh/cheatcodes/), which can manipulate the state of the blockchain. However, I was missing out on some features offered by Hardhat. 
 
 ## Getting Started
 
 ```shell
 yarn
 forge install
+yarn upgrade hardhat
+foundryup
 ```
 
 ## Foundry Instructions
