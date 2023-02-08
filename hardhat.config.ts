@@ -19,7 +19,7 @@ dotenv.config();
       settings: {
           optimizer: {
               enabled: true,
-              runs: 5000,
+              runs: 2000,
               details: { yul: false },
           },
       },
