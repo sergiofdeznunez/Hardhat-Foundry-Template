@@ -1,8 +1,8 @@
 {
   "name": "hardhat-foundry-boiler",
   "scripts": {
-    "full:test": "npx hardhat test && forge test -vvvv",
-    "hh:test": "npx hardhat test",
+    "full:test": "npx hardhat test --vvvv && forge test -vvvv",
+    "hh:test": "npx hardhat test --vvvv",
     "f:test": "forge test -vvvv",
     "hh:compile": "npx hardhat compile",
     "hh:coverage": "hardhat coverage",
@@ -42,7 +42,8 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "latest",
-    "@openzeppelin/contracts-upgradeable": "latest"
+    "@openzeppelin/contracts": "^4.8.2",
+    "@openzeppelin/contracts-upgradeable": "^4.8.2",
+    "hardhat-tracer": "^2.1.2"
   }
 }

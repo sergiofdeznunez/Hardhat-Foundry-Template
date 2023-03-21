@@ -10,8 +10,8 @@ Foundry has some awesome testing capabilities, thanks to [cheatcodes](https://bo
 
 ```shell
 yarn
+yarn upgrade
 forge install
-yarn upgrade hardhat
 foundryup
 ```
 

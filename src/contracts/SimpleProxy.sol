@@ -19,50 +19,60 @@ pragma solidity ^0.8.0;
 
 contract Proxy {
 
-    event LogicContractChanged(address _newImplementation);
-
-    event AdminChanged(address _newAdmin);
-
     //address where the proxy will make the delegatecall
     bytes32 private constant logic_contract = keccak256("proxy.logic");
-    
-    bytes32 private constant proxy_admin = keccak256("proxy.admin");
-    
+    bytes32 private constant proxy_owner = keccak256("proxy.owner");
+
+    event LogicContractChange(address _newImplementation);
+    event OwnerChange(address _newOwner);
+
+    modifier onlyProxyOwner {
+        require(proxyOwner() == msg.sender, "you're not the proxy owner");
+        _;
+    }
 
     constructor(address _logic_contract) {
-       bytes32 position = proxy_admin;
-       address admin = msg.sender;
-       assembly{
-           sstore(position, admin)
-       }
-       position = logic_contract;
-       assembly{
-           sstore(position, _logic_contract)
-       }
+        bytes32 position = proxy_owner;
+        address admin = msg.sender;
+        assembly{
+            sstore(position, admin)
+        }
+        position = logic_contract;
+        assembly{
+            sstore(position, _logic_contract)
+        }
+    }
+
+    fallback () external payable {
+        _fallback();
+    }
+
+    receive () external payable {
+        _fallback();
     }
 
     /**
      * @notice Function to change the logic contract.
      * @param _logicAddress New logic contract address.
      */
-    function setLogicContract(address _logicAddress) public onlyProxyAdmin {   
+    function setLogicContract(address _logicAddress) external onlyProxyOwner {   
         bytes32 position = logic_contract;   
         assembly {
             sstore(position, _logicAddress)
         } 
-        emit LogicContractChanged(_logicAddress);
+        emit LogicContractChange(_logicAddress);
     } 
 
     /**
      * @notice Function to set the admin of the contract.
-     * @param _newAdmin New admin of the contract.
+     * @param _newOwner New admin of the contract.
      */
-    function setProxyAdmin(address _newAdmin) public onlyProxyAdmin  {
-        bytes32 position = proxy_admin;   
+    function setProxyOwner(address _newOwner) external onlyProxyOwner  {
+        bytes32 position = proxy_owner;   
         assembly {
-            sstore(position, _newAdmin)
+            sstore(position, _newOwner)
         } 
-        emit AdminChanged(_newAdmin);
+        emit OwnerChange(_newOwner);
     }
     
     /**
@@ -78,32 +88,24 @@ contract Proxy {
     /**
      * @notice Getter for the proxy admin address
      */
-    function proxyAdmin() public view returns(address admin) {   
-        bytes32 position = proxy_admin;   
+    function proxyOwner() public view returns(address admin) {   
+        bytes32 position = proxy_owner;   
         assembly {
             admin := sload(position)
         } 
     }
 
-    fallback() external payable {
+    function _fallback() internal {
         bytes32 position = logic_contract;
-    assembly {
-      let _target := sload(position)
-      calldatacopy(0x0, 0x0, calldatasize())
-      let result := delegatecall(gas(), _target, 0x0, calldatasize(), 0x0, 0)
-      returndatacopy(0x0, 0x0, returndatasize())
-      switch result 
-      case 0 {revert(0, returndatasize())} 
-      default {return (0, returndatasize())}
+        assembly {
+          let _target := sload(position)
+          calldatacopy(0x0, 0x0, calldatasize())
+          let result := delegatecall(gas(), _target, 0x0, calldatasize(), 0x0, 0)
+          returndatacopy(0x0, 0x0, returndatasize())
+          switch result 
+          case 0 {revert(0, returndatasize())} 
+          default {return (0, returndatasize())}
         }
-    }
-    
-    /**
-    * @dev only the admin is allowed to call the functions that implement this modifier
-    */
-    modifier onlyProxyAdmin {
-        require(proxyAdmin() == msg.sender, "you're not the proxy admin");
-        _;
     }
     
 }
