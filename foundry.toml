@@ -2,7 +2,7 @@
 src = 'src'                                                   # the source directory
 test = 'src/test'                                             # the test directory
 out = 'artifacts/contracts'                                   # the output directory (for artifacts)
-libs = []                                                     # a list of library directories
+libs = ["lib"]
 remappings = []                                               # a list of remappings
 libraries = []                                                # a list of deployed libraries to link against
 cache = true                                                  # whether to cache builds or not
