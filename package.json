@@ -2,7 +2,7 @@
   "name": "hardhat-foundry-boiler",
   "scripts": {
     "full:test": "npx hardhat test --vvvv && forge test -vvvv",
-    "hh:test": "npx hardhat test --vvvv",
+    "hh:test": "npx hardhat test",
     "f:test": "forge test -vvvv",
     "hh:compile": "npx hardhat compile",
     "hh:coverage": "hardhat coverage",
