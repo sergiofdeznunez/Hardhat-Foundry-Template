@@ -47,6 +47,18 @@ npx solhint 'contracts/**/*.sol'
 npx solhint 'contracts/**/*.sol' --fix
 ```
 
+## Predefined Scripts
+
+```shell
+yarn full:test
+yarn hh:test
+yarn f:test
+yarn hh:compile
+yarn f:compile
+yarn hh:coverage
+yarn deploy "NETWORK_NAME"
+```
+
 ### Etherscan/Polygonscan verification
 
 To try out Etherscan verification, you first need to deploy a contract to a network

@@ -1,11 +1,8 @@
 import * as dotenv from "dotenv";
-
 import { HardhatUserConfig } from "hardhat/config";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
 import "hardhat-gas-reporter";
-require("hardhat-tracer");
+import "hardhat-tracer";
+import "@nomicfoundation/hardhat-toolbox";
 
 dotenv.config();
 
@@ -29,31 +26,31 @@ dotenv.config();
     },
     polygon: {
       url: " https://polygon-rpc.com",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
     ethereum: {
-      url: "https://mainnet.infura.io/v3/a7a3d44c2ed340f2b0a3bfde0588ec47",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      url: process.env.INFURA_API_KEY !== undefined ? `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` : "",
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
     mumbai: {
       url: "https://rpc-mumbai.maticvigil.com",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
     goerli: {
-      url: "https://goerli.infura.io/v3/a7a3d44c2ed340f2b0a3bfde0588ec47",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      url: process.env.INFURA_API_KEY !== undefined ? `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` : "",
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
     cronos: {
       url: "https://evm.cronos.org",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
     celo: {
       url: "https://forno.celo.org",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
     gnosis: {
       url: "https://rpc.gnosischain.com/",
-      accounts: process.env.PRIVATE_KEY != undefined ? [process.env.PRIVATE_KEY]:[]
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY]:[]
     },
   },
   gasReporter: {
@@ -61,7 +58,7 @@ dotenv.config();
     currency: "EUR",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: process.env.ETHERSCAN_API_KEY !== undefined ? process.env.ETHERSCAN_API_KEY : "",
   },
   paths: {
     sources: "./src/contracts",

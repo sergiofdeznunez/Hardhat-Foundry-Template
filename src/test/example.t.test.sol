@@ -2,7 +2,7 @@
 pragma solidity 0.8.7;
 
 import "ds-test/test.sol";
-import "../contracts/Proxy.sol";
+import "../contracts/SimpleProxy.sol";
 
 interface CheatCodes {
     function prank(address _from) external;
